@@ -1,0 +1,41 @@
+name: Appium CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
+jobs:
+        test:
+          runs-on: ubuntu-latest
+          steps:
+          - name: Checkout code
+            uses: actions/checkout@v2
+
+          - name: Set up Node.js
+            uses: actions/setup-node@v2
+            with:
+              node-version: '14' # specify your Node.js version
+
+          - name: Install dependencies
+            run: npm install
+
+          - name: Install Expo CLI
+            run: npm install -g expo-cli
+      
+          - name: Login to Expo
+            run: expo login --non-interactive -u ${{ secrets.EXPO_USERNAME }} -p ${{ secrets.EXPO_PASSWORD }}
+      
+          - name: Build Expo project
+            run: expo build:ios # or expo build:ios
+      
+          - name: Install Appium
+            run: npm install -g appium
+      
+          - name: Start Appium server
+            run: appium &
+
+          - name: Run Appium tests
+            run: npm test # assuming your Appium tests are configured in your package.json
+      
