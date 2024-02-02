@@ -9,7 +9,8 @@
     "eject": "expo eject",
     "eas": "eas build --platform all",
     "eas:android": "eas build --platform android --profile development",
-    "eas:ios": "eas build --platform ios --profile development"
+    "eas:ios": "eas build --platform ios --profile development",
+    "test": "python3 -m unittest discover -s tests"
   },
   "dependencies": {
     "@config-plugins/ffmpeg-kit-react-native": "^5.0.0",
